@@ -24,7 +24,7 @@ def findSame(item: str, column: str) -> int:
             for j in range(len(array2D)):
                 if(array2D[j][i] ==  item):
                     count+=1
-    print('Found ' + str(count) + ' matching search ' + item)
+    print('Found ' + str(count) + ' matching search \"' + item + '\" in \"' + column + '\"')
     return count
 
 
