@@ -10,6 +10,7 @@ array2D = []
 for i in range(rows.size):
     array2D.append(table.values[i])
 
+
 # A simple search function that returns the number of times a certain item is contained in a single column
 # String[] array - the array of robots to search
 # String item - the item to be searched for (examples: blue, x, cen...)
@@ -20,12 +21,14 @@ def countSame(array, item: str, column: str) -> int:
     print('Found ' + str(count) + ' matching search \"' + item + '\" in \"' + column + '\"')
     return count
 
+
 # A simple search function that returns all the robots with a certain feature in a certain column
 # String[] array - the array of robots to search
 # String item - the item to be searched for (examples: blue, x, cen...)
 # String column - the column to be searched (examples: eye color, pupil (x/y), eye position...)
 # [] return - the the array of robots for which item appeared in column
 def findSame(array, item: str, column: str):
+    print('Searching for \"' + str(item) + '\" in \"' + str(column) + '\"')
     robots = []
     # For every column,
     for col in range(columns.size):
@@ -33,16 +36,18 @@ def findSame(array, item: str, column: str):
         if(columns[col] == column):
             # For each robot in that column,
             for row in range(len(array)):
-                print('len = ' + str(len(array)))
-                print('len[row] = ' + str(len(array[row])))
-                print('array[' + str(col) + ']')
+                #print('len = ' + str(len(array)))
+                #print('len[row] = ' + str(len(array[row])))
+                print('columns[' + str(col) + '] = ' + str(columns[col]))
                 print('array[' + str(row) + '][' + str(col) + ']')
+                print(str(array[row][col]) + ' is not equal to ' + str(item))
                 # If a robot's feature matches,
                 if(array[row][col] ==  item):
                     # Add it to the list
                     robots.append(array2D[i])
-    print(robots)
+    print('len(robots) = ' + str(len(robots)))
     return robots
+
 
 # String item1 - the first item to be searched for (examples: blue, x, cen...)
 # String column1 - the first column to be searched (examples: eye color, pupil (x/y), eye position...)
@@ -64,6 +69,3 @@ find2Combo("black", "face color", "blue", "eye color")
 
 print("Rows: " + str(rows.size))
 print("Columns: " + str(columns.size))
-
-#for i in range(10):
-#    print(array2D[i])
