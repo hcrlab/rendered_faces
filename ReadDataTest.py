@@ -27,14 +27,19 @@ def countSame(array, item: str, column: str) -> int:
 # [] return - the the array of robots for which item appeared in column
 def findSame(array, item: str, column: str):
     robots = []
+    # For every column,
     for col in range(columns.size):
+        # If the current column is the desired one,
         if(columns[col] == column):
+            # For each robot in that column,
             for row in range(len(array)):
                 print('len = ' + str(len(array)))
                 print('len[row] = ' + str(len(array[row])))
                 print('array[' + str(col) + ']')
                 print('array[' + str(row) + '][' + str(col) + ']')
+                # If a robot's feature matches,
                 if(array[row][col] ==  item):
+                    # Add it to the list
                     robots.append(array2D[i])
     print(robots)
     return robots
@@ -46,8 +51,10 @@ def findSame(array, item: str, column: str):
 # int return - the number of times item appeared in column
 def find2Combo(item1: str, column1: str, item2: str, column2: str) -> int:
     count = 0
+    # The robots with the first feature are saved
     matches = findSame(array2D, item1, column1)
     countSame(array2D, item1, column1)
+    # Out of the robots with the first feature, the robots with the second feature also are returned
     count = countSame(matches, item2, column2)
     return count
 
