@@ -27,14 +27,15 @@ def countSame(array, item: str, column: str) -> int:
 # [] return - the the array of robots for which item appeared in column
 def findSame(array, item: str, column: str):
     robots = []
-    print(len(array))
-    print(len(array[0]))
-    for i in range(columns.size):
-        if(columns[i] == column):
-            for j in range(len(array)):
-                if(array[j][i] ==  item):
-                    for i in range(rows.size):
-                        robots.append(array2D[i])
+    for col in range(columns.size):
+        if(columns[col] == column):
+            for row in range(len(array)):
+                print('len = ' + str(len(array)))
+                print('len[row] = ' + str(len(array[row])))
+                print('array[' + str(col) + ']')
+                print('array[' + str(row) + '][' + str(col) + ']')
+                if(array[row][col] ==  item):
+                    robots.append(array2D[i])
     print(robots)
     return robots
 
