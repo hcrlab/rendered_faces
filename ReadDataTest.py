@@ -7,7 +7,7 @@ columns = table.axes[1]
 
 # Creating 2D array that will function as our 'spreadsheet'
 array2D = []
-array2D.append(table.axes[1])
+#array2D.append(table.axes[1])
 for i in range(rows.size):
     array2D.append(table.values[i])
 #for j in range(rows.size):
@@ -27,11 +27,11 @@ def findSame(item: str, column: str) -> int:
     return count
 
 
-
 # print(table)
 findSame("blue", "eye color")
 
 print("Rows: " + str(rows.size))
 print("Columns: " + str(columns.size))
 
-print(array2D[0])
+for i in range(10):
+    print(array2D[i])
