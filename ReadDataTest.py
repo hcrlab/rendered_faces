@@ -7,8 +7,11 @@ columns = table.axes[1]
 
 # Creating 2D array that will function as our 'spreadsheet'
 array2D = []
-for j in range(rows.size):
-    array2D.append([columns[i] for i in range(columns.size)])
+array2D.append(table.axes[1])
+for i in range(rows.size):
+    array2D.append(table.values[i])
+#for j in range(rows.size):
+#    array2D.append([table[i] for i in range(table.size)])
 
 # A simple search function that returns the number of times a certain item is contained in a single column
 # String item - the item to be searched for (examples: blue, x, cen...)
@@ -16,15 +19,17 @@ for j in range(rows.size):
 def findSame(item, column):
     count = 0
     for i in range(columns.size):
-        if(columns[i].equals(column)):
-            for j in range(rows.size):
-                if(rows[j].equals(item)):
+        if(columns[i] == column):
+            for j in range(len(array2D)):
+                if(array2D[j][i] ==  item):
                     count+=1
     print('Found ' + str(count) + ' matching search ' + item)
     return count
 
 
+
 # print(table)
+print(findSame("blue", "eye color"))
 
 print("Rows: " + str(rows.size))
 print("Columns: " + str(columns.size))
