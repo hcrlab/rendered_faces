@@ -10,7 +10,9 @@ array2D = []
 for j in range(rows.size):
     array2D.append([columns[i] for i in range(columns.size)])
 
-
+# A simple search function that returns the number of times a certain item is contained in a single column
+# String item - the item to be searched for (examples: blue, x, cen...)
+# String column - the column to be searched (examples: eye color, pupil (x/y), eye position...)
 def findSame(item, column):
     count = 0
     for i in range(columns.size):
