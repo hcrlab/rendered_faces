@@ -16,7 +16,7 @@ for i in range(rows.size):
 # A simple search function that returns the number of times a certain item is contained in a single column
 # String item - the item to be searched for (examples: blue, x, cen...)
 # String column - the column to be searched (examples: eye color, pupil (x/y), eye position...)
-def findSame(item, column):
+def findSame(item: str, column: str) -> int:
     count = 0
     for i in range(columns.size):
         if(columns[i] == column):
@@ -29,7 +29,7 @@ def findSame(item, column):
 
 
 # print(table)
-print(findSame("blue", "eye color"))
+findSame("blue", "eye color")
 
 print("Rows: " + str(rows.size))
 print("Columns: " + str(columns.size))
