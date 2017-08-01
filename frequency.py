@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 
 # path to spreadsheet file - tab separated file format
 file_path='data/Filtered Face Data - data.tsv'
@@ -30,7 +31,6 @@ def category_freq(dataframe):
         result_df['percentage'] = as_percent
         print(result_df)
 
-
 def get_mode(dataframe):
     """ display the mode of a column constrained by another column. in this example, print
     the most common eye color for each face color """
@@ -42,13 +42,13 @@ def groupby_cols(dataframe):
     """ groupby_result = dataframe.groupby(['face color',
                                         'mouth',
                                         'mouth length',
-                                        'mouth placement ',
+                                        'mouth placement',
                                         'mouth color (or outline color)',
                                         'nose',
                                         'nose color',
                                         'nose shape',
                                         'nose size',
-                                        'nose placement ',
+                                        'nose placement',
                                         'eyebrows',
                                         'eyebrow color',
                                         'eyebrow length',
@@ -68,18 +68,8 @@ def groupby_cols(dataframe):
                                         'cheek spacing'
                                         ])['Name'].count() """
     groupby_result = dataframe.groupby(['face color',
-                                        'mouth',
-                                        'nose',
-                                        'eyebrows',
-                                        'eye size',
-                                        'eye shape',
-                                        'eye placement',
                                         'eye color',
-                                        '# glare circles',
-                                        'pupil (y/n)',
-                                        'iris',
-                                        'lashes color',
-                                        'cheeks (blush)',
+                                        'eye size'
                                         ])['Name'].count()
     groupby_result = groupby_result.sort_values(ascending=False)
     print(groupby_result)
