@@ -13,15 +13,22 @@ table = table.drop('notes', 1)
 def category_freq(dataframe):
     """ display descending list of category frequencies per column, with percentages """
     total_rows = len(dataframe)
+    # make empty DataFrame to store results
+    result_df = pd.DataFrame()
     for col in dataframe:
-        num_categories = len(dataframe.groupby(col))
+        """num_categories = len(dataframe.groupby(col))
         print(
             "---- %s TOTAL CATEGORIES FOR %s ----"
-            % (num_categories, dataframe[col].name))
+            % (num_categories, dataframe[col].name))"""
+        # generate series to list occurrences of each column value
         col_vals = dataframe[col].value_counts()
-        # add series to display percentages
-        col_vals['percentage'] = 100* col_vals/float(total_rows)
-        print(col_vals)
+        # store series as DataFrame
+        result_df = col_vals.to_frame()
+        # generate series to display percentages
+        as_percent = 100 * col_vals/float(total_rows)
+        # append percentages column to DataFrame
+        result_df['percentage'] = as_percent
+        print(result_df)
 
 
 def get_mode(dataframe):
