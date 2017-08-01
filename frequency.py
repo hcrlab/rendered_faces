@@ -10,10 +10,19 @@ table = pd.read_table(file_path)
 # dataframe = dataframe.drop('column_name', 1) >> where 1 is the axis number (0 for rows and 1 for columns.)
 table = table.drop('notes', 1)
 
-def most_freq_cols(dataframe):
-    """ display most frequent occurrences of a column value in a DataFrame """
+def category_freq(dataframe):
+    """ display descending list of category frequencies per column, with percentages """
+    total_rows = len(dataframe)
     for col in dataframe:
-        print(dataframe[col].value_counts())
+        num_categories = len(dataframe.groupby(col))
+        print(
+            "---- %s TOTAL CATEGORIES FOR %s ----"
+            % (num_categories, dataframe[col].name))
+        col_vals = dataframe[col].value_counts()
+        # add series to display percentages
+        col_vals['percentage'] = 100* col_vals/float(total_rows)
+        print(col_vals)
+
 
 def get_mode(dataframe):
     """ display the mode of a column constrained by another column. in this example, print
