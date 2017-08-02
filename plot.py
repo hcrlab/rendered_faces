@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # path to spreadsheet file - tab separated file format
-file_path='data/Filtered Face Data - data.tsv'
+file_path='data/Filtered Face Data - data_wo_hidden.tsv'
 # pandas takes a .tsv as a default, so no need for parameters
 # read in file, results in a DataFrame object
 table = pd.read_table(file_path)
@@ -67,6 +67,12 @@ def plot_pie(s):
 def plot_area(df, filename):
     """ generate unstacked area chart for a given DataFrame """
     df.plot.area(stacked=False)
+    plt.grid(which='both')
+    # replace any forward slashes in the column title so the file name works
+    plt.savefig(filename.replace("/", "-") + '_chart.png')
+
+def plot_bar(df, col, filename):
+    df.plot(x=col, figsize=(20,12), kind='bar')
     # replace any forward slashes in the column title so the file name works
     plt.savefig(filename.replace("/", "-") + '_chart.png')
 
@@ -83,6 +89,19 @@ def plot_feature_overlap(df, features_list, filename):
             results[df[col].name] = col_vals
     # plot the area graph of chosen features
     plot_area(results, filename)
+
+def plot_num_categories(df):
+    # create blank dataframe to store results
+    results = pd.DataFrame(columns=["category", "num_categories"])
+    for col in df:
+        # don't include the Name category in our results
+        if df[col].name == 'Name':
+            continue
+        results = results.append({
+                    "category": df[col].name,
+                    "num_categories": len(df.groupby(col))
+                    }, ignore_index=True)
+    plot_bar(results, "category", "num_per_dimension")
 
 # Ex: plot an area chart of all features that use colors
 #plot_feature_overlap(table, cols_feature_colors, "feature_colors")
