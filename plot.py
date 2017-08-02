@@ -72,6 +72,7 @@ def plot_area(df, filename):
     plt.savefig(filename.replace("/", "-") + '_chart.png')
 
 def plot_bar(df, col, filename):
+    """ generate bar graph of chosen column in a DataFrame. this chart is wide."""
     df.plot(x=col, figsize=(20,12), kind='bar')
     # replace any forward slashes in the column title so the file name works
     plt.savefig(filename.replace("/", "-") + '_chart.png')
@@ -94,7 +95,7 @@ def plot_num_categories(df):
     # create blank dataframe to store results
     results = pd.DataFrame(columns=["category", "num_categories"])
     for col in df:
-        # don't include the Name category in our results
+        # don't include the robot Name category in our results
         if df[col].name == 'Name':
             continue
         results = results.append({
