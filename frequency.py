@@ -1,3 +1,4 @@
+from locale import normalize
 import pandas as pd
 import numpy as np
 
@@ -6,6 +7,8 @@ file_path='data/Filtered Face Data - data_wo_hidden.tsv'
 # pandas takes a .tsv as a default, so no need for parameters
 # read in file, results in a DataFrame object
 table = pd.read_table(file_path)
+# exclude faces which use back-projection screens
+table = table[table['screen type'] != 'back']
 
 def category_freq(dataframe):
     """ display descending list of category frequencies per column, with percentages """
@@ -36,18 +39,30 @@ def get_mode(dataframe):
 
 def groupby_cols(dataframe):
     """ return total amount of faces fitting certain column criteria """
-    # group all robots by feature presence/absence
+    # group all robots by specific column names
     groupby_result = dataframe.groupby([
-                                        'mouth',
-                                        'nose',
-                                        'eyebrows',
-                                        'pupil (y/n)',
-                                        'cheeks (blush)',
-                                        'hair',
-                                        'ears'
-                                        ])['Name'].count()
+                    'face color',
+                    'eye color',
+                    'eye outline color'
+                    ])['Name'].count()
     # order the results
     groupby_result = groupby_result.sort_values(ascending=False)
     print(groupby_result)
     # groupby_result.to_csv('groupby_results.txt', header=True, sep='\t')
     # print("results written to file")
+
+def groupby_cols_in_range(df, lower_bound):
+    """ return total amount of faces fitting certain column criteria """
+    # get total number of robot faces in data set
+    total_rows = len(df)
+    # determine the upper bound percentage
+    upper_bound = 100 - lower_bound
+    groupby_result = df.groupby([
+                    'face color',
+                    'eye color',
+                    'eye outline color'
+                    ])['Name'].size().reset_index(name='count')
+    groupby_result['as_percent'] = 100 * groupby_result['count']/float(total_rows)
+    # order the results
+    groupby_result = groupby_result.sort_values(by='count', ascending=False)
+    print(groupby_result)
