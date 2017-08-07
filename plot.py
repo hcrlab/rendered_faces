@@ -6,6 +6,8 @@ file_path='data/Filtered Face Data - data_wo_hidden.tsv'
 # pandas takes a .tsv as a default, so no need for parameters
 # read in file, results in a DataFrame object
 table = pd.read_table(file_path)
+# exclude faces which use back-projection screens
+table = table[table['screen type'] != 'back']
 
 # list of all columns that fit within our 15%-85% range
 cols_in_range = [
@@ -47,13 +49,18 @@ cols_features = [
                 'cheeks (blush)'
                 ]
 
-# list of all feature color values that fit within our 15%-85% range
+# list of all features that use color values
 cols_feature_colors = [
                     'face color',
                     'mouth color (or outline color)',
                     'nose color',
                     'eyebrow color',
                     'eye color',
+                    'eye outline color',
+                    'pupil color',
+                    'mouth inside color',
+                    'cheek color',
+                    'hair color',
                     'lashes color'
                     ]
 
@@ -66,7 +73,7 @@ def plot_pie(s):
 
 def plot_area(df, filename):
     """ generate unstacked area chart for a given DataFrame """
-    df.plot.area(stacked=False)
+    df.plot.area(stacked=True)
     plt.grid(which='both')
     # replace any forward slashes in the column title so the file name works
     plt.savefig(filename.replace("/", "-") + '_chart.png')
@@ -106,3 +113,6 @@ def plot_num_categories(df):
 
 # Ex: plot an area chart of all features that use colors
 #plot_feature_overlap(table, cols_feature_colors, "feature_colors")
+
+plot_feature_overlap(table, cols_features, "feature_overlap_stacked")
+plot_feature_overlap(table, cols_feature_colors, "feature_colors_stacked")
