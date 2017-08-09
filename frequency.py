@@ -85,7 +85,7 @@ def category_freq(dataframe):
         # store series as DataFrame
         result_df = col_vals.to_frame()
         # generate series to display percentages
-        as_percent = 100 * col_vals/float(total_rows)
+        as_percent = 100 * col_vals / float(total_rows)
         # append percentages column to DataFrame
         result_df['percentage'] = as_percent
         print(result_df)
@@ -153,7 +153,7 @@ def cluster_by_range(df, lower_bound):
             continue
         # count & calculate percentage representation for each value of the column
         col_check = df.groupby(col).size().reset_index(name='count')
-        col_check['as_percent'] = 100 * col_check['count']/float(total_rows)
+        col_check['as_percent'] = 100 * col_check['count'] / float(total_rows)
         # if percentage is over the upper bound, add it to list of features to fix
         if not col_check[col_check['as_percent'] >= upper_bound].empty:
             cols_to_fix.append(df[col].name)
@@ -222,9 +222,9 @@ def cluster_by_split(filtered_df):
                 for index, row in cluster_by_feature.iterrows():
                     # use feature value to call groupby() on the entire data set
                     results = unfiltered_df[unfiltered_df[col] == row[0]]
-                    results = results\
-                        .groupby(list(unfiltered_df))\
-                        .size()\
+                    results = results \
+                        .groupby(list(unfiltered_df)) \
+                        .size() \
                         .reset_index(name='count')
                     # calculate count as a percentage
                     results['as_percent'] = 100 * results['count'] / float(total_rows)
