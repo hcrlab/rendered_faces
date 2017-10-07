@@ -17,10 +17,6 @@ section {
   min-height: 400px;
 }
 
-troll {
-  float: left;
-}
-
 section:first-of-type {
   margin-left: 0;
 }
